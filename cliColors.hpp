@@ -1,19 +1,22 @@
 #pragma once
 namespace colors {
-const constexpr auto size = 13;
-const constexpr auto red("\e[1;31m");
-const constexpr auto orange("\e[1;33m");
-const constexpr auto yellow("\e[1;93m");
-const constexpr auto green("\e[1;32m");
-const constexpr auto cyan("\e[1;36m");
-const constexpr auto blue("\e[1;34m");
-const constexpr auto purple("\e[1;35m");
-const constexpr auto pink("\e[1;95m");
-const constexpr auto white("\e[1;97m");
-const constexpr auto gray("\e[1;90m");
-const constexpr auto black("\e[1;30m");
-const constexpr auto brightgray("\e[1;37m");
-const constexpr auto brightred("\e[1;91m");
-const constexpr auto brightgreen("\e[1;92m");
-const constexpr auto reset("\e[0m");
+static constexpr uint8_t size{13};
+static constexpr const char* red{"\e[1;31m"};
+static constexpr const char* orange{"\e[1;33m"};
+static constexpr const char* yellow{"\e[1;93m"};
+static constexpr const char* green{"\e[1;32m"};
+static constexpr const char* cyan{"\e[1;36m"};
+static constexpr const char* blue{"\e[1;34m"};
+static constexpr const char* purple{"\e[1;35m"};
+static constexpr const char* pink{"\e[1;95m"};
+static constexpr const char* white{"\e[1;97m"};
+static constexpr const char* gray{"\e[1;90m"};
+static constexpr const char* black{"\e[1;30m"};
+static constexpr const char* brightgray{"\e[1;37m"};
+static constexpr const char* brightred{"\e[1;91m"};
+static constexpr const char* brightgreen{"\e[1;92m"};
+static constexpr const char* reset{"\e[0m"};
 }  // namespace colors
+
+#define colorize(color, what) \
+    color << what << colors::reset

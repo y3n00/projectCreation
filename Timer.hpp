@@ -1,16 +1,22 @@
+#pragma once
 #include <chrono>
 #include <iostream>
-typedef std::chrono::nanoseconds nanosec;
+namespace ch = std::chrono;
 
 class Timer {
    private:
-    std::chrono::time_point<std::chrono::high_resolution_clock> begin;
+    using ms = ch::milliseconds;
+    ch::time_point<ch::high_resolution_clock> begin;
+    const char* title;
 
    public:
-    Timer() : begin(std::chrono::high_resolution_clock::now()) {}
+    Timer(const char* title)
+        : title{title},
+          begin{ch::high_resolution_clock::now()} {
+        std::cerr << '[' << title << ']' << '\n';
+    }
 
     ~Timer() {
-        std::chrono::duration<float> dur = std::chrono::high_resolution_clock::now() - begin;
-        std::cout << "Time took: " << std::chrono::duration_cast<nanosec>(dur).count() << "ns\n";
+        std::cerr << '[' << title << ']' << " Time took: " << ch::duration_cast<ms>(ch::high_resolution_clock::now() - begin).count() << "ms\n";
     }
 };
