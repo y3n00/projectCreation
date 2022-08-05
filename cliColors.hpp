@@ -1,6 +1,6 @@
 #pragma once
 namespace colors {
-static constexpr uint8_t size{13};
+static constexpr unsigned size{13};
 static constexpr const char* red{"\e[1;31m"};
 static constexpr const char* orange{"\e[1;33m"};
 static constexpr const char* yellow{"\e[1;93m"};
