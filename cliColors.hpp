@@ -1,22 +1,47 @@
 #pragma once
-namespace colors {
-static constexpr unsigned size{13};
-static constexpr const char* red{"\e[1;31m"};
-static constexpr const char* orange{"\e[1;33m"};
-static constexpr const char* yellow{"\e[1;93m"};
-static constexpr const char* green{"\e[1;32m"};
-static constexpr const char* cyan{"\e[1;36m"};
-static constexpr const char* blue{"\e[1;34m"};
-static constexpr const char* purple{"\e[1;35m"};
-static constexpr const char* pink{"\e[1;95m"};
-static constexpr const char* white{"\e[1;97m"};
-static constexpr const char* gray{"\e[1;90m"};
-static constexpr const char* black{"\e[1;30m"};
-static constexpr const char* brightgray{"\e[1;37m"};
-static constexpr const char* brightred{"\e[1;91m"};
-static constexpr const char* brightgreen{"\e[1;92m"};
-static constexpr const char* reset{"\e[0m"};
-}  // namespace colors
+#include <array>
+#include <string>
+#include <string_view>
+#include <type_traits>
 
-#define colorize(color, what) \
-    color << what << colors::reset
+enum Colors : uint8_t {
+    red = 0,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    purple,
+    pink,
+    brightgreen,
+    brightred,
+    black,
+    gray,
+    brightgray,
+    white,
+    reset
+};
+
+class ColorTxt {
+   public:
+    static inline const std::string SetC(std::string&& str, Colors c) {
+        return m_colors[c] + str + m_colors[reset];
+    }
+
+    static inline const std::string GetC(Colors color) { return m_colors[color]; }
+    static inline const std::string Reset() { return m_colors[reset]; }
+    const static auto* get() { return &m_colors; }
+
+   private:
+    static const std::array<std::string, 15> m_colors;
+};
+
+const std::array<std::string, 15> ColorTxt::m_colors{
+    "\e[1;31m", "\e[1;33m",
+    "\e[1;93m", "\e[1;32m",
+    "\e[1;36m", "\e[1;34m",
+    "\e[1;35m", "\e[1;95m",
+    "\e[1;92m", "\e[1;91m",
+    "\e[1;30m", "\e[1;90m",
+    "\e[1;37m", "\e[1;97m",
+    "\e[0m"};
