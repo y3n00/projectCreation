@@ -30,8 +30,7 @@ class ColorTxt {
 
     static inline const std::string GetC(Colors color) { return m_colors[color]; }
     static inline const std::string Reset() { return m_colors[reset]; }
-    const static auto* get() { return &m_colors; }
-
+    
    private:
     static const std::array<std::string, 15> m_colors;
 };
