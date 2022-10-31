@@ -4,13 +4,14 @@ cd $1;
 mkdir include src build;
 echo "\n\nint main(){}" > main.cpp;
 
-echo "compiler := g++" > Makefile
-echo "files := src/*.cpp main.cpp" >> Makefile
-echo "flags := -std=c++2b" >> Makefile
+echo "cc := g++" > Makefile
+echo "src := main.cpp" >> Makefile
+echo "exe := -o $1" >> Makefile
+echo "libs := " >> Makefile
+echo "flags := -std=c++2b \$(libs)" >> Makefile
 
-echo "default:\n\t\$(compiler) \$(files) \$(flags) -o build/$1" >> Makefile;
-echo "debug:\n\t\$(compiler) \$(files) \$(flags) -Og -o build/$1debug" >> Makefile;
-echo "opt:\n\t\$(compiler) \$(files) \$(flags) -O3 -o build/$1opt" >> Makefile;
+echo "release:\n\t\$(cc) \$(exe) \$(flags) -O3" >> Makefile
+echo "debug:\n\t\$(cc) \$(exe)_dbg \$(flags) -Og" >> Makefile
 
 wget -bq -O create.sh https://raw.githubusercontent.com/cheenaze/useful_files/main/create.sh > /dev/null
 chmod +x create.sh;
